@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="app_name">Play</string>
+
+    <!--title-->
+
+    <!--activity_login-->
+    <string name="activity_login_login">Login</string>
+    <string name="activity_login_register">Register</string>
+
+    <!--fragment_login-->
+    <string name="fragment_login_username">UserName</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_login_loginButton">Login</string>
+    <string name="fragment_login_rememberUsername">Remember Username</string>
+    <string name="fragment_login_autoLogin">Auto Login</string>
+
+    <!--fragment_register-->
+    <string name="fragment_register_username">UserName</string>
+    <string name="fragment_register_password">Password</string>
+    <string name="fragment_register_registerButton">Register</string>
+
+
+
+
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+
+
+    <string name="welcome" translatable="false">"Welcome !"</string>
+    <string name="login_failed" translatable="false">"Login failed"</string>
+    <string name="hello_world" translatable="false">Hello Square World!</string>
+</resources>
