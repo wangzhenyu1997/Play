@@ -1,12 +1,13 @@
 package com.wang.play.ui.activity.login
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.wang.play.data.login.LoginDataSource
-import com.wang.play.data.login.LoginRepository
-import kotlinx.coroutines.launch
+import cn.leancloud.AVUser
+import com.wang.play.MyApplication
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 class LoginViewModel : ViewModel() {
 
@@ -14,41 +15,74 @@ class LoginViewModel : ViewModel() {
     private val _loginFrom = MutableLiveData<LoginFromState>().also {
         it.value = LoginFromState()
     }
-    val welcomeFrom: LiveData<LoginFromState> = _loginFrom
+    val loginFrom: LiveData<LoginFromState> = _loginFrom
+
 
     private val _loginResult = MutableLiveData<LoginResult>().also {
         it.value = LoginResult()
     }
-    val welcomeResult: LiveData<LoginResult> = _loginResult
+    val loginResult: LiveData<LoginResult> = _loginResult
 
 
-    fun login(username: String, password: String) {
+    //注册
+    fun register(registerUsername: String, registerPassword: String) {
 
-        loginDataChanged(username, password)
+        AVUser().apply {
+            username = registerUsername
+            password = registerPassword
+            signUpInBackground().subscribe(object : Observer<AVUser> {
 
-        viewModelScope.launch {
-            if (_loginFrom.value?.isDataValid == true) {
-                _loginResult.postValue(LoginResult(LoginRepository.login(username, password)))
-            }
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onNext(t: AVUser) {
+                    login(registerUsername, registerPassword)
+                }
+
+                override fun onError(e: Throwable) {
+                    Toast.makeText(
+                        MyApplication.context,
+                        "${e.message ?: "没有错误信息"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    _loginResult.postValue(LoginResult(false))
+                }
+
+                override fun onComplete() {}
+            })
         }
+
 
     }
 
-    fun register(username: String, password: String) {
 
-        loginDataChanged(username, password)
+    //登录
+    fun login(loginUsername: String, loginPassword: String) {
 
-        viewModelScope.launch {
-            if (_loginFrom.value?.isDataValid == true) {
+        AVUser.logIn(loginUsername, loginPassword)
+            .subscribe(object : Observer<AVUser?> {
 
-                LoginDataSource.setData(username, password)
-                _loginResult.postValue(LoginResult(LoginRepository.login(username, password)))
-            }
-        }
+                override fun onError(throwable: Throwable) {
+                    Toast.makeText(
+                        MyApplication.context,
+                        "${throwable.message ?: "没有错误信息"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    _loginResult.postValue(LoginResult(false))
+                }
 
+                override fun onComplete() {}
+
+                override fun onNext(t: AVUser) {
+
+                    _loginResult.postValue(LoginResult(true))
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+            })
     }
 
-    private fun loginDataChanged(username: String, password: String) {
+    //检查用户名和密码的有效性
+    fun loginDataChanged(username: String, password: String) {
 
         val usernameValid = isUserNameValid(username)
         val passwordValid = isPasswordValid(password)
@@ -57,6 +91,7 @@ class LoginViewModel : ViewModel() {
             LoginFromState(usernameValid, passwordValid, usernameValid && passwordValid)
 
     }
+
 
     private fun isUserNameValid(username: String) =
         username.contains("@")

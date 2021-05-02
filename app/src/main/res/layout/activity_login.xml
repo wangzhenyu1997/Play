@@ -17,10 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         app:lottie_rawRes="@raw/login" />
 
 
     <LinearLayout
+        android:id="@+id/activity_login_linearLayout"
         android:layout_width="380dp"
         android:layout_height="500dp"
         android:orientation="vertical"
@@ -52,6 +55,18 @@
 
 
     </LinearLayout>
+
+
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/activity_login_loadingProgressBar"-->
+<!--        style="?android:attr/progressBarStyle"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/activity_login_linearLayout" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,10 +6,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.wang.play.BaseActivity
 import com.wang.play.R
 import com.wang.play.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -35,5 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.activityMainNavView.setupWithNavController(navController)
 
 
+
     }
+
+
 }

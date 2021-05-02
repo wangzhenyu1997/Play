@@ -9,14 +9,13 @@
     <string name="activity_login_register">Register</string>
 
     <!--fragment_login-->
-    <string name="fragment_login_username">UserName</string>
+    <string name="fragment_login_username">UserName(QQEmail)</string>
     <string name="fragment_login_password">Password</string>
     <string name="fragment_login_loginButton">Login</string>
     <string name="fragment_login_rememberUsername">Remember Username</string>
-    <string name="fragment_login_autoLogin">Auto Login</string>
 
     <!--fragment_register-->
-    <string name="fragment_register_username">UserName</string>
+    <string name="fragment_register_username">UserName(QQEmail)</string>
     <string name="fragment_register_password">Password</string>
     <string name="fragment_register_registerButton">Register</string>
 

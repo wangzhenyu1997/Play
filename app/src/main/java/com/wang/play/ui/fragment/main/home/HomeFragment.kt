@@ -1,12 +1,16 @@
 package com.wang.play.ui.fragment.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import cn.leancloud.AVUser
+import com.wang.play.MyApplication
 import com.wang.play.databinding.FragmentHomeBinding
+import com.wang.play.ui.activity.login.LoginActivity
 
 class HomeFragment : Fragment() {
 
@@ -24,6 +28,14 @@ class HomeFragment : Fragment() {
             FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding.root
+
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
 
     }
 }

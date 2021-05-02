@@ -1,18 +1,21 @@
 package com.wang.play.ui.fragment.login.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tencent.mmkv.MMKV
+import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.UtilString
-import com.wang.play.data.login.User
 import com.wang.play.databinding.FragmentLoginBinding
 import com.wang.play.ui.activity.login.LoginViewModel
 import com.wang.play.ui.activity.main.MainActivity
@@ -20,23 +23,23 @@ import com.wang.play.ui.activity.main.MainActivity
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel by viewModels<LoginViewModel>()
 
     //MMKV
     private val kv = MMKV.defaultMMKV()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         viewInit()
 
@@ -46,16 +49,35 @@ class LoginFragment : Fragment() {
     }
 
 
+    //初始化界面
+    private fun viewInit() {
+        //判断是否有记住的用户名
+        if (kv?.decodeBool(UtilString.ActivityLoginRememberUsername, false) == true) {
+            binding.fragmentLoginRememberUsername.isChecked = true
+            binding.fragmentLoginUsername.setText(
+                kv?.decodeString(
+                    UtilString.ActivityLoginUsername,
+                    ""
+                ) ?: ""
+            )
+        }
+    }
+
+
     //登录检查
     private fun loginCheck() {
 
-        viewModel.welcomeResult.observe(viewLifecycleOwner, Observer {
+        //登录成功后跳转界面
+        viewModel.loginResult.observe(viewLifecycleOwner, {
             if (it.result) {
                 startActivity(Intent(MyApplication.context, MainActivity::class.java))
+            } else {
+                binding.fragmentLoginProgressBar.visibility = View.INVISIBLE
             }
         })
 
-        viewModel.welcomeFrom.observe(viewLifecycleOwner, Observer {
+        //检查登录名和密码
+        viewModel.loginFrom.observe(viewLifecycleOwner, Observer {
             if (!it.isUserNameValid) {
                 Toast.makeText(MyApplication.context, "登录名错误", Toast.LENGTH_SHORT).show()
                 return@Observer
@@ -68,12 +90,16 @@ class LoginFragment : Fragment() {
 
         binding.fragmentLoginLogin.setOnClickListener {
 
-            loginRemember()
+            val username = binding.fragmentLoginUsername.text.toString().replace(" ", "")
+            val password = binding.fragmentLoginPassword.text.toString().replace(" ", "")
 
-            viewModel.login(
-                binding.fragmentLoginUsername.text.toString(),
-                binding.fragmentLoginPassword.text.toString()
-            )
+            viewModel.loginDataChanged(username, password)
+
+            if (viewModel.loginFrom.value?.isDataValid == true) {
+                binding.fragmentLoginProgressBar.visibility = View.VISIBLE
+                loginRemember()
+                viewModel.login(username, password)
+            }
         }
     }
 
@@ -89,36 +115,8 @@ class LoginFragment : Fragment() {
         } else {
             kv?.encode(UtilString.ActivityLoginRememberUsername, false)
         }
-        if (binding.fragmentLoginAutoLogin.isChecked) {
-            kv?.encode(UtilString.ActivityLoginAutoLogin, true)
-            kv?.encode(
-                UtilString.ActivityLoginUser, User(
-                    binding.fragmentLoginUsername.text.toString(),
-                    binding.fragmentLoginPassword.text.toString()
-                )
-            )
-        } else {
-            kv?.encode(UtilString.ActivityLoginAutoLogin, false)
-        }
-
     }
 
-    //初始化界面
-    private fun viewInit() {
-        //判断是否有记住的用户名
-        if (kv?.decodeBool(UtilString.ActivityLoginRememberUsername, false) == true) {
-            binding.fragmentLoginRememberUsername.isChecked = true
-            binding.fragmentLoginUsername.setText(
-                kv?.decodeString(
-                    UtilString.ActivityLoginUsername,
-                    ""
-                ) ?: ""
-            )
-        }
-        if (kv?.decodeBool(UtilString.ActivityLoginAutoLogin, false) == true) {
-            binding.fragmentLoginAutoLogin.isChecked = true
-        }
 
-    }
 }
 

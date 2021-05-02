@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.wang.mylibrary.util.LogUtil
 import com.wang.play.BaseActivity
 import com.wang.play.R
 import com.wang.play.databinding.ActivityLoginBinding
@@ -31,8 +30,7 @@ class LoginActivity : BaseActivity() {
 
         viewPager2Init()
 
-        keyboardListener()
-
+        viewListener()
     }
 
     override fun onStop() {
@@ -98,20 +96,17 @@ class LoginActivity : BaseActivity() {
 
 
     //监听键盘的弹出与收回
-    private fun keyboardListener() {
-        loginBinding.activityLogin.viewTreeObserver.addOnGlobalLayoutListener {
+    private fun viewListener() {
 
-            //获取当前可见显示框的rectangle
+        loginBinding.activityLogin.viewTreeObserver.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener { //获取当前可见显示框的rectangle
             val rect = Rect()
             loginBinding.activityLogin.getWindowVisibleDisplayFrame(rect)
-
             if (loginBinding.activityLogin.rootView.height - rect.bottom > 250) {
                 loginBinding.activityLoginLottie.visibility = View.INVISIBLE
             } else {
                 loginBinding.activityLoginLottie.visibility = View.VISIBLE
             }
-        }
+        })
     }
-
 
 }

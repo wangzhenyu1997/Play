@@ -2,7 +2,7 @@ package com.wang.mylibrary.util
 
 import android.util.Log
 
-object LogUtil {
+object MyApplicationLogUtil {
 
     private const val VERBOSE = 1
     private const val DEBUG = 2

@@ -6,14 +6,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+import cn.leancloud.AVOSCloud
+import cn.leancloud.AVObject
 import com.tencent.mmkv.MMKV
-import com.wang.mylibrary.util.LogUtil
-import com.wang.play.data.login.User
 
 
 class MyApplication : Application() {
 
     companion object {
+
+
+        //全局Context
         lateinit var context: Context
 
 
@@ -22,12 +25,20 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        ProcessLifecycleOwner.get().lifecycle.addObserver(MyApplicationObserver())
 
+        //观察进程的lifecycle
+        ProcessLifecycleOwner.get().lifecycle.addObserver(MyApplicationObserver())
 
         //初始化MMKV
         val rootDir = MMKV.initialize(this)
 
+        //初始化LeanCloud
+        AVOSCloud.initialize(
+            this,
+            "EmE3O3B6rRiaayIN5BrrQS6Y-gzGzoHsz",
+            "sDyW32EvUihIggtDYpG2LsGa",
+            "https://eme3o3b6.lc-cn-n1-shared.com"
+        )
 
     }
 
@@ -35,10 +46,13 @@ class MyApplication : Application() {
     //观察应用的生命周期
     class MyApplicationObserver() : LifecycleObserver {
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-        fun applicationPause() {
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        fun applicationStop() {
             //Toast.makeText(MyApplication.context, "您的应用已退出，请小心", Toast.LENGTH_SHORT).show()
         }
 
     }
+
+
+
 }

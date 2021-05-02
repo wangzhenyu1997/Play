@@ -3,12 +3,11 @@
     <string name="app_name">Play</string>
     <string name="activity_login_login">登录</string>
     <string name="activity_login_register">注册</string>
-    <string name="fragment_login_username">用户名</string>
+    <string name="fragment_login_username">用户名（邮箱账号）</string>
     <string name="fragment_login_password">密码</string>
     <string name="fragment_login_loginButton">登录</string>
-    <string name="fragment_register_username">用户名</string>
+    <string name="fragment_register_username">用户名（邮箱账号）</string>
     <string name="fragment_register_password">密码</string>
     <string name="fragment_register_registerButton">注册</string>
     <string name="fragment_login_rememberUsername">记住用户名</string>
-    <string name="fragment_login_autoLogin">自动登录</string>
 </resources>
