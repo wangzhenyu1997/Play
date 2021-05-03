@@ -51,6 +51,7 @@ class RegisterFragment : Fragment() {
                 startActivity(Intent(MyApplication.context, MainActivity::class.java))
             } else {
                 binding.fragmentRegisterProgressBar.visibility = View.INVISIBLE
+                binding.fragmentRegisterRegister.isEnabled = true
             }
         })
 
@@ -74,6 +75,7 @@ class RegisterFragment : Fragment() {
             viewModel.loginDataChanged(username, password)
 
             if (viewModel.loginFrom.value?.isDataValid == true) {
+                binding.fragmentRegisterRegister.isEnabled = false
                 binding.fragmentRegisterProgressBar.visibility = View.VISIBLE
                 viewModel.register(username, password)
             }

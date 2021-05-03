@@ -73,6 +73,7 @@ class LoginFragment : Fragment() {
                 startActivity(Intent(MyApplication.context, MainActivity::class.java))
             } else {
                 binding.fragmentLoginProgressBar.visibility = View.INVISIBLE
+                binding.fragmentLoginLogin.isEnabled = true
             }
         })
 
@@ -96,6 +97,7 @@ class LoginFragment : Fragment() {
             viewModel.loginDataChanged(username, password)
 
             if (viewModel.loginFrom.value?.isDataValid == true) {
+                binding.fragmentLoginLogin.isEnabled = false
                 binding.fragmentLoginProgressBar.visibility = View.VISIBLE
                 loginRemember()
                 viewModel.login(username, password)
