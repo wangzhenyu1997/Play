@@ -7,7 +7,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import cn.leancloud.AVOSCloud
-import cn.leancloud.AVObject
 import com.tencent.mmkv.MMKV
 
 
