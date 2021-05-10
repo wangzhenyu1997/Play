@@ -43,18 +43,23 @@ dependencies {
 
 
     def lifecycle_version = "2.3.1"
-
-    //ProcessLifecycleOwner
-    implementation 'androidx.lifecycle:lifecycle-process:2.2.0'
-
-    //Lottie
-    implementation 'com.airbnb.android:lottie:3.7.0'
+    def nav_version = "2.3.5"
 
     //ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //ProcessLifecycleOwner
+    implementation 'androidx.lifecycle:lifecycle-process:2.2.0'
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:3.7.0'
 
     //MMKV
     implementation 'com.tencent:mmkv-static:1.2.7'
@@ -71,10 +76,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment:2.3.5'
-    implementation 'androidx.navigation:navigation-ui:2.3.5'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
     implementation project(path: ':mylibrary')
     implementation 'androidx.annotation:annotation:1.1.0'
     testImplementation 'junit:junit:4.13.2'
