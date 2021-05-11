@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_first">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.wang.play.ui.fragment.main.home.HomeFragment"
+        android:id="@+id/navigation_first"
+        android:name="com.wang.play.ui.fragment.main.first.FirstFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_first" >
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.wang.play.ui.fragment.main.dashboard.DashboardFragment"
+        android:id="@+id/navigation_second"
+        android:name="com.wang.play.ui.fragment.main.second.SecondFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_second" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.wang.play.ui.fragment.main.notifications.NotificationsFragment"
+        android:id="@+id/navigation_third"
+        android:name="com.wang.play.ui.fragment.main.third.ThirdFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_third" />
 </navigation>

@@ -19,9 +19,12 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initNavigation()
+
     }
 
 
+    //初始化导航
     private fun initNavigation() {
 
         //设置标题栏
@@ -31,11 +34,13 @@ class MainActivity : BaseActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications
+                R.id.navigation_first,
+                R.id.navigation_second,
+                R.id.navigation_third
             )
         )
 

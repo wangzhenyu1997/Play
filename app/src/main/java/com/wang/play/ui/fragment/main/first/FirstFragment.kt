@@ -1,4 +1,4 @@
-package com.wang.play.ui.fragment.main.home
+package com.wang.play.ui.fragment.main.first
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.wang.play.databinding.FragmentHomeBinding
+import com.wang.play.databinding.FragmentFirstBinding
 
-class HomeFragment : Fragment() {
+class FirstFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var firstViewModel: FirstViewModel
+    private lateinit var binding: FragmentFirstBinding
 
 
     override fun onCreateView(
@@ -20,10 +20,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        firstViewModel =
+            ViewModelProvider(this).get(FirstViewModel::class.java)
         binding =
-            FragmentHomeBinding.inflate(inflater, container, false)
+            FragmentFirstBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.button.isEnabled = false
+
 
 
     }
