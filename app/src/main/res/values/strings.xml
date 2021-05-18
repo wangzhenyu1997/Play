@@ -20,14 +20,18 @@
     <string name="fragment_register_registerButton">Register</string>
 
 
-    <string name="title_home" translatable="false">Home</string>
-    <string name="title_dashboard" translatable="false">Dashboard</string>
-    <string name="title_notifications" translatable="false">Notifications</string>
+    <!--activity_main-->
+    <string name="title_first">Home</string>
+    <string name="title_second">Square</string>
+    <string name="title_third">Notifications</string>
+    <string name="title_fourth">Me</string>
 
 
     <!--    这是看测试字符串-->
     <string name="welcome" translatable="false">"Welcome !"</string>
     <string name="login_failed" translatable="false">"Login failed"</string>
     <string name="hello_world" translatable="false">Hello Square World!</string>
-    <string name="test" translatable="false">TEST</string>
+    <string name="test">TEST</string>
+
+
 </resources>

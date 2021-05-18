@@ -1,8 +1,10 @@
 package com.wang.play.ui.activity.main
 
 import android.os.Bundle
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.wang.play.BaseActivity
@@ -13,8 +15,10 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,22 +34,24 @@ class MainActivity : BaseActivity() {
         //设置标题栏
         setSupportActionBar(binding.activityMainToolBar)
 
-
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment)
+                    as NavHostFragment
         val navController = navHostFragment.navController
-
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_first,
                 R.id.navigation_second,
-                R.id.navigation_third
+                R.id.navigation_third,
+                R.id.navigation_fourth
             )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.activityMainNavView.setupWithNavController(navController)
+
+
     }
 
 }

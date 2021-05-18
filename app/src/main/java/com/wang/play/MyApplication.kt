@@ -1,5 +1,6 @@
 package com.wang.play
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.Lifecycle
@@ -13,9 +14,8 @@ import com.tencent.mmkv.MMKV
 class MyApplication : Application() {
 
     companion object {
-
-
         //全局Context
+        @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
 
 
@@ -43,7 +43,7 @@ class MyApplication : Application() {
 
 
     //观察应用的生命周期
-    class MyApplicationObserver() : LifecycleObserver {
+    class MyApplicationObserver : LifecycleObserver {
 
         @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
         fun applicationStop() {

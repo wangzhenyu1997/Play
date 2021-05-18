@@ -41,7 +41,7 @@ class LoginViewModel : ViewModel() {
                 override fun onError(e: Throwable) {
                     Toast.makeText(
                         MyApplication.context,
-                        "${e.message ?: "没有错误信息"}",
+                        e.message ?: "没有错误信息",
                         Toast.LENGTH_SHORT
                     ).show()
                     _loginResult.postValue(LoginResult(false))
@@ -64,7 +64,7 @@ class LoginViewModel : ViewModel() {
                 override fun onError(throwable: Throwable) {
                     Toast.makeText(
                         MyApplication.context,
-                        "${throwable.message ?: "没有错误信息"}",
+                        throwable.message ?: "没有错误信息",
                         Toast.LENGTH_SHORT
                     ).show()
                     _loginResult.postValue(LoginResult(false))

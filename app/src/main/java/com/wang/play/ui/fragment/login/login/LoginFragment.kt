@@ -1,19 +1,15 @@
 package com.wang.play.ui.fragment.login.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.tencent.mmkv.MMKV
-import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.UtilString
 import com.wang.play.databinding.FragmentLoginBinding
@@ -32,7 +28,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,6 +36,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
 
         viewInit()
 
@@ -55,7 +52,7 @@ class LoginFragment : Fragment() {
         if (kv?.decodeBool(UtilString.ActivityLoginRememberUsername, false) == true) {
             binding.fragmentLoginRememberUsername.isChecked = true
             binding.fragmentLoginUsername.setText(
-                kv?.decodeString(
+                kv.decodeString(
                     UtilString.ActivityLoginUsername,
                     ""
                 ) ?: ""

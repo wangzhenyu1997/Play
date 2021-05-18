@@ -10,4 +10,9 @@
     <string name="fragment_register_password">密码</string>
     <string name="fragment_register_registerButton">注册</string>
     <string name="fragment_login_rememberUsername">记住用户名</string>
+    <string name="test">这只是一个测试</string>
+    <string name="title_first">首页</string>
+    <string name="title_second">广场</string>
+    <string name="title_fourth">我的</string>
+    <string name="title_third">通知</string>
 </resources>

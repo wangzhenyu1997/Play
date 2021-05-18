@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.wang.play.R
+import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.databinding.FragmentThirdBinding
 
 class ThirdFragment : Fragment() {
@@ -20,7 +18,8 @@ class ThirdFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         thirdViewModel =
             ViewModelProvider(this).get(ThirdViewModel::class.java)
         binding =
@@ -30,6 +29,22 @@ class ThirdFragment : Fragment() {
     }
 
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        MyApplicationLogUtil.d("TestNowAAAThird","onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MyApplicationLogUtil.d("TestNowAAAThird","onDestroy")
+    }
+
+
+    override fun onDetach() {
+        super.onDetach()
+        MyApplicationLogUtil.d("TestNowAAAThird","onDetach")
+    }
 
 
 }

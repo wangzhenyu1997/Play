@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.BaseActivity
 import com.wang.play.R
 import com.wang.play.databinding.ActivityLoginBinding
@@ -24,6 +25,7 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MyApplicationLogUtil.d("LoginActivityLog", "onCreate")
 
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
@@ -33,9 +35,30 @@ class LoginActivity : BaseActivity() {
         viewListener()
     }
 
+    override fun onStart() {
+        super.onStart()
+        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onPause")
+    }
+
     override fun onStop() {
         super.onStop()
+        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onStop")
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onDestroy")
     }
 
     //配置ViewPager2

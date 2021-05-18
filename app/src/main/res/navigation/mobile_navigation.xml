@@ -8,19 +8,26 @@
     <fragment
         android:id="@+id/navigation_first"
         android:name="com.wang.play.ui.fragment.main.first.FirstFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_first" >
-    </fragment>
+        android:label="@string/title_first"
+        tools:layout="@layout/fragment_first" />
 
     <fragment
         android:id="@+id/navigation_second"
         android:name="com.wang.play.ui.fragment.main.second.SecondFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_second"
         tools:layout="@layout/fragment_second" />
 
     <fragment
         android:id="@+id/navigation_third"
         android:name="com.wang.play.ui.fragment.main.third.ThirdFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_third"
         tools:layout="@layout/fragment_third" />
+
+    <fragment
+        android:id="@+id/navigation_fourth"
+        android:name="com.wang.play.ui.fragment.main.fourth.FourthFragment"
+        android:label="@string/title_fourth"
+        tools:layout="@layout/fragment_fourth" />
+
+
 </navigation>
