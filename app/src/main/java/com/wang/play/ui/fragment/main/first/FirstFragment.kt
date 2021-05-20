@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.R
@@ -15,8 +14,9 @@ import com.wang.play.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
 
-    private lateinit var firstViewModel: FirstViewModel
+    private val firstViewModel: FirstViewModel by viewModels()
     private lateinit var binding: FragmentFirstBinding
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -26,6 +26,31 @@ class FirstFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplicationLogUtil.d("TestNowAAAFirst", "onCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        MyApplicationLogUtil.d("TestNowAAAFirst", "onCreateView")
+
+        binding =
+            FragmentFirstBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
+        binding.button2.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_first_to_testFragment)
+        }
+
+        MyApplicationLogUtil.d("TestNowAAAFirst", "onActivityCreated")
+
     }
 
     override fun onStart() {
@@ -50,7 +75,6 @@ class FirstFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // binding.button.findNavController().navigateUp()
         MyApplicationLogUtil.d("TestNowAAAFirst", "onDestroyView")
     }
 
@@ -62,31 +86,6 @@ class FirstFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         MyApplicationLogUtil.d("TestNowAAAFirst", "onDetach")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onCreateView")
-
-        firstViewModel =
-            ViewModelProvider(this).get(FirstViewModel::class.java)
-        binding =
-            FragmentFirstBinding.inflate(inflater, container, false)
-
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-
-
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onActivityCreated")
-
     }
 
 

@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
 
-    private lateinit var secondViewModel: SecondViewModel
+    private val secondViewModel: SecondViewModel by viewModels()
     private lateinit var binding: FragmentSecondBinding
-
 
 
     override fun onAttach(context: Context) {
@@ -47,17 +47,17 @@ class SecondFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        MyApplicationLogUtil.d("TestNowAAASecond","onDestroyView")
+        MyApplicationLogUtil.d("TestNowAAASecond", "onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MyApplicationLogUtil.d("TestNowAAASecond","onDestroy")
+        MyApplicationLogUtil.d("TestNowAAASecond", "onDestroy")
     }
 
     override fun onDetach() {
         super.onDetach()
-        MyApplicationLogUtil.d("TestNowAAASecond","onDetach")
+        MyApplicationLogUtil.d("TestNowAAASecond", "onDetach")
     }
 
 
@@ -67,8 +67,6 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        secondViewModel =
-            ViewModelProvider(this).get(SecondViewModel::class.java)
         binding =
             FragmentSecondBinding.inflate(inflater, container, false)
 
@@ -78,11 +76,7 @@ class SecondFragment : Fragment() {
     }
 
 
-   // findNavController().popBackStack()
-
-
-
-
+    // findNavController().popBackStack()
 
 
     //sharedElementEnterTransition = TransitionInflater.from(requireContext())

@@ -12,11 +12,13 @@ import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.adapter.FlowerAdapter
 import com.wang.play.data.main.testResponse
+import com.wang.play.databinding.FragmentFirstBinding
 import com.wang.play.databinding.FragmentFourthBinding
 import com.wang.play.repository.CreateService
 import com.wang.play.datasource.room.database.AppDatabase
 import com.wang.play.datasource.room.entity.User
 import com.wang.play.datasource.service.testAPI
+import com.wang.play.ui.fragment.main.first.FirstViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -27,6 +29,8 @@ class FourthFragment : Fragment() {
 
     private lateinit var binding: FragmentFourthBinding
     private val fourthViewModel: FourthViewModel by viewModels()
+
+
 
     private val flowerAdapter = FlowerAdapter()
 

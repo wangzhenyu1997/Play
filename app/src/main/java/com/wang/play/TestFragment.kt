@@ -29,24 +29,25 @@ class TestFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        binding.button9.setOnClickListener {
+            findNavController().navigate(R.id.action_testFragment_to_testFragment2)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        MyApplicationLogUtil.d("TestNowAAATest","onDestroyView")
+        MyApplicationLogUtil.d("TestNowAAATest", "onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MyApplicationLogUtil.d("TestNowAAATest","onDestroy")
+        MyApplicationLogUtil.d("TestNowAAATest", "onDestroy")
     }
 
     override fun onDetach() {
         super.onDetach()
-        MyApplicationLogUtil.d("TestNowAAATest","onDetach")
+        MyApplicationLogUtil.d("TestNowAAATest", "onDetach")
     }
-
 
 
 }
