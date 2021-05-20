@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.wang.mylibrary.util.MyApplicationLogUtil
+import com.wang.play.MyApplication
 import com.wang.play.databinding.FragmentFirstBinding
 import com.wang.play.databinding.FragmentThirdBinding
+import com.wang.play.datasource.room.database.AppDatabase
 import com.wang.play.ui.fragment.main.first.FirstViewModel
 
 class ThirdFragment : Fragment() {
@@ -17,6 +19,8 @@ class ThirdFragment : Fragment() {
     private val  thirdViewModel: ThirdViewModel by viewModels()
     private lateinit var binding: FragmentThirdBinding
 
+    //操作数据库
+    private val useDatabase = AppDatabase.getInstance(MyApplication.context)?.userDao()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,11 @@ class ThirdFragment : Fragment() {
         return binding.root
     }
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
