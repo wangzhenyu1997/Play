@@ -7,18 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ConcatAdapter
 import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.adapter.FlowerAdapter
 import com.wang.play.data.main.testResponse
-import com.wang.play.databinding.FragmentFirstBinding
 import com.wang.play.databinding.FragmentFourthBinding
-import com.wang.play.repository.CreateService
 import com.wang.play.datasource.room.database.AppDatabase
 import com.wang.play.datasource.room.entity.User
 import com.wang.play.datasource.service.testAPI
-import com.wang.play.ui.fragment.main.first.FirstViewModel
+import com.wang.play.repository.CreateService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -29,7 +27,6 @@ class FourthFragment : Fragment() {
 
     private lateinit var binding: FragmentFourthBinding
     private val fourthViewModel: FourthViewModel by viewModels()
-
 
 
     private val flowerAdapter = FlowerAdapter()
@@ -47,7 +44,7 @@ class FourthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-      
+
         binding =
             FragmentFourthBinding.inflate(inflater, container, false)
 
@@ -58,8 +55,6 @@ class FourthFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         binding.fragmentFourthRecyclerView.adapter = flowerAdapter
-
-fourthViewModel.run {  }
 
 
         scope.launch(Dispatchers.Main)
