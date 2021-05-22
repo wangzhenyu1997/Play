@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.databinding.FragmentSecondBinding
 
@@ -75,6 +76,11 @@ class SecondFragment : Fragment() {
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        binding.fragmentSecondImageView.load("https://ae01.alicdn.com/kf/Ua867fc827ce646efa6718e273d543a783.jpg")
+    }
 
     // findNavController().popBackStack()
 
