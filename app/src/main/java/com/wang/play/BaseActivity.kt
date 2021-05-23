@@ -23,5 +23,9 @@ open class BaseActivity : AppCompatActivity() {
         //test 3
         MyApplicationLogUtil.d("CCCC", "CCCCCCCC")
 
+
+
+        //test 4
+        MyApplicationLogUtil.d("DDDD", "DDDDDDDDD")
     }
 }
