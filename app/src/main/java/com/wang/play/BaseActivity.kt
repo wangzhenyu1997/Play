@@ -3,6 +3,7 @@ package com.wang.play
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.wang.mylibrary.util.MyApplicationLogUtil
 
 open class BaseActivity : AppCompatActivity() {
 
