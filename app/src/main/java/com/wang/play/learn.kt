@@ -1,23 +1,19 @@
 package com.wang.play
 
-data class Person(val a: String, val b: String) {
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-}
 
-fun main() {
+fun main() = runBlocking {
 
-    val a = Person("AA", "BB")
-    val b = Person("AA", "BB")
-    val c = Person("CC", "DD")
-    val d = Person("EE", "FF")
 
-    val apple = mutableSetOf<Person>()
+    GlobalScope.launch {
+        delay(1000)
+        println("Kotlin AA")
+    }
 
-    apple.add(a)
-    apple.add(b)
-    apple.add(c)
-    apple.add(d)
-
-    println(apple)
-
+    println("Hello")
+   // delay(1000)
 }

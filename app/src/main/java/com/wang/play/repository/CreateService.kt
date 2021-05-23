@@ -14,8 +14,11 @@ object CreateService {
     //test2
     private const val BASE_URL2 = "https://gank.io/api/v2/data/category/Girl/type/Girl/"
 
+
     private val okHttpClient = OkHttpClient.Builder()
-        .callTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(5, TimeUnit.SECONDS)
+        .writeTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(5, TimeUnit.SECONDS)
         .build()
 
     //test1

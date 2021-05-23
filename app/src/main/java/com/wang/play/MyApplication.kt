@@ -18,6 +18,7 @@ class MyApplication : Application() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
 
+        const val APP_KEY = "9a721292358a94f0c92caba0b3064cb5"
 
     }
 
@@ -51,7 +52,6 @@ class MyApplication : Application() {
         }
 
     }
-
 
 
 }
