@@ -1,19 +1,15 @@
 package com.wang.play
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+
+fun main() {
 
 
-fun main() = runBlocking {
+    apple()
 
 
-    GlobalScope.launch {
-        delay(1000)
-        println("Kotlin AA")
-    }
+}
 
-    println("Hello")
-   // delay(1000)
+
+fun apple() {
+    println("AAAAAAAAAAAA")
 }

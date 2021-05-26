@@ -18,6 +18,7 @@ class MyApplication : Application() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
 
+        //聚合数据APP_KEY,News数据一天一百次
         const val APP_KEY = "9a721292358a94f0c92caba0b3064cb5"
 
     }
@@ -27,7 +28,7 @@ class MyApplication : Application() {
         context = applicationContext
 
         //观察进程的lifecycle
-        ProcessLifecycleOwner.get().lifecycle.addObserver(MyApplicationObserver())
+      //  ProcessLifecycleOwner.get().lifecycle.addObserver(MyApplicationObserver())
 
         //初始化MMKV
         val rootDir = MMKV.initialize(this)

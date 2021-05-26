@@ -1,4 +1,4 @@
-package com.wang.play.datasource.service
+package com.wang.play.datasource.service.main
 
 import com.wang.play.data.main.second.News
 import retrofit2.http.GET

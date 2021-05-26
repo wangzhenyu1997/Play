@@ -26,8 +26,17 @@
     <string name="title_third">Notifications</string>
     <string name="title_fourth">Me</string>
 
+    <!--fragment_first-->
+    <!--fragment_second-->
+    <string name="fragment_second_news">News</string>
+    <!--fragment_third-->
+    <!--fragment_fourth-->
 
-    <!--    这是看测试字符串-->
+
+    <!--footer_item-->
+    <string name="footer_item_button">Retry</string>
+
+    <!--    这是测试字符串-->
     <string name="welcome" translatable="false">"Welcome !"</string>
     <string name="login_failed" translatable="false">"Login failed"</string>
     <string name="hello_world" translatable="false">Hello Square World!</string>

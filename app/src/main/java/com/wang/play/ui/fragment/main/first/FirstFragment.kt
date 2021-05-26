@@ -1,15 +1,12 @@
 package com.wang.play.ui.fragment.main.first
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.wang.mylibrary.util.MyApplicationLogUtil
-import com.wang.play.R
 import com.wang.play.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
@@ -18,15 +15,6 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
 
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onAttach")
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onCreate")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,47 +33,8 @@ class FirstFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        binding.button2.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_first_to_testFragment)
-        }
 
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onActivityCreated")
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onStop")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        MyApplicationLogUtil.d("TestNowAAAFirst", "onDetach")
     }
 
 

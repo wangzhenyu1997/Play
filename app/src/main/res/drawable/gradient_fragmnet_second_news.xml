@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<gradient
+    android:angle="-90"
+    android:endColor="@color/black"
+    android:startColor="@color/white" />
+</shape>
+
+    <!--attributes:-->
+
+
+
+    <!--android:angle-->
+    <!--Integer，代表渐变颜色的角度， 0 is left to right, 90 is bottom to top. 必须是45的整数倍.-->
+    <!--默认是 0.该属性只有在type=linear情况下起作用，默认的type为linear。-->
+    <!--android:startColor-->
+    <!--颜色渐变的开始颜色-->
+    <!--android:endColor-->
+    <!--颜色渐变的结束颜色-->
+    <!--android:centerColor-->
+    <!--颜色渐变的中间颜色-->
+    <!--android:centerX-->
+    <!--Float.(0 - 1.0) 相对X的渐变位置。-->
+    <!--android:centerY-->
+    <!--Float.(0 - 1.0) 相对Y的渐变位置。-->
+    <!--centerX和centerY，这两个属性只有在type不为linear情况下起作用。-->
+    <!--android:gradientRadius-->
+    <!--渐变颜色的半径，单位应该是像素点。需要 android:type="radial"。-->
+    <!--如果android:type=”radial”，没有设置android:gradientRadius，将会报错，error inflating class。-->
+    <!--android:type-->
+    <!--linear:线性渐变-->
+    <!--radial：A radial gradient. 放射性渐变（圆形渐变），起始颜色从cenralX,centralY点开始。-->
+    <!--sweep：A sweeping line gradient. 扫描式渐变（扇形渐变）。-->
+    <!--android:useLevel-->
+    <!--使用LevelListDrawable时就要设置为true，设为false时才有渐变效果。-->
