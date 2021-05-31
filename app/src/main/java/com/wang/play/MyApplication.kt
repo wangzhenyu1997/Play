@@ -21,6 +21,9 @@ class MyApplication : Application() {
         //聚合数据APP_KEY,News数据一天一百次
         const val APP_KEY = "9a721292358a94f0c92caba0b3064cb5"
 
+        //Pixabay中我的KEY
+        const val Pixabay_Key = "20693865-3b0038f8765a58dc75d008c2c"
+
     }
 
     override fun onCreate() {

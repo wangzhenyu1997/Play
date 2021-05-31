@@ -6,7 +6,6 @@ import retrofit2.http.Path
 
 interface BeautifulAPI {
 
-
     //page: >=1
     //count: [10, 50]
     @GET("page/{page}/count/{count}")

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wang.mylibrary.util.MyApplicationLogUtil
-import com.wang.play.adapter.TestAdapter
+import com.wang.play.adapter.test.TestAdapter
 import com.wang.play.databinding.FragmentThirdBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -15,20 +15,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 
-//https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
-//请求方式: GET
-//注:
-//
-//category 可接受参数 All(所有分类) | Article | GanHuo | Girl
-//type 可接受参数 All(全部类型) | Android | iOS | Flutter | Girl ...，即分类API返回的类型数据
-//count: [10, 50]
-//page: >=1
-//示例:
-//
-//获取妹子列表
-//https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10
-//获取Android干货列表
-//https://gank.io/api/v2/data/category/GanHuo/type/Android/page/1/count/10
 
 
 class ThirdFragment : Fragment() {
@@ -37,9 +23,9 @@ class ThirdFragment : Fragment() {
     private lateinit var binding: FragmentThirdBinding
 
     //TestAdapter
-    private val testAdapter = TestAdapter()
-
-    private val scope = MainScope()
+//    private val testAdapter = TestAdapter()
+//
+//    private val scope = MainScope()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,20 +44,20 @@ class ThirdFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        binding.fragmentThirdRecyclerView.adapter = testAdapter
+//        binding.fragmentThirdRecyclerView.adapter = testAdapter
 
 
         //初始化Observe
-        initObserve()
-
-        initListener()
+//        initObserve()
+//
+//        initListener()
 
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         MyApplicationLogUtil.d("TestNowAAAThird", "onDestroyView")
-        scope.cancel()
+
     }
 
     override fun onDestroy() {
@@ -96,12 +82,12 @@ class ThirdFragment : Fragment() {
     private fun initListener() {
 
 
-        binding.fragmentThirdButton1.setOnClickListener {
-            scope.launch(Dispatchers.IO) {
-                thirdViewModel.loadBeautiful(testAdapter, "1", "20")
-            }
-
-        }
+//        binding.fragmentThirdButton1.setOnClickListener {
+//            scope.launch(Dispatchers.IO) {
+//                thirdViewModel.loadBeautiful(testAdapter, "1", "20")
+//            }
+//
+//        }
 
 
 //        binding.fragmentThirdButton1.setOnClickListener {

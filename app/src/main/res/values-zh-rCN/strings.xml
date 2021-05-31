@@ -15,6 +15,7 @@
     <string name="title_second">广场</string>
     <string name="title_fourth">我的</string>
     <string name="title_third">通知</string>
-    <string name="fragment_second_news">新闻</string>
+    <string name="fragment_second_search">你想要什么 ?</string>
     <string name="footer_item_button">刷新</string>
+    <string name="item_footer_buttom">重试</string>
 </resources>

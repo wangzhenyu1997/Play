@@ -8,11 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object CreateService {
 
-    //test1
-    private const val BASE_URL = "https://www.wanandroid.com/"
 
-    //test2
-    private const val BASE_URL2 = "https://gank.io/api/v2/data/category/Girl/type/Girl/"
 
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -20,6 +16,15 @@ object CreateService {
         .writeTimeout(5, TimeUnit.SECONDS)
         .connectTimeout(5, TimeUnit.SECONDS)
         .build()
+
+
+
+    //test1
+    private const val BASE_URL = "https://www.wanandroid.com/"
+
+    //test2
+    private const val BASE_URL2 = "https://gank.io/api/v2/data/category/Girl/type/Girl/"
+
 
     //test1
     private val retrofit = Retrofit.Builder()

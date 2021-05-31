@@ -1,36 +1,58 @@
 package com.wang.play.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wang.play.R
+import com.wang.play.databinding.ItemFooterBinding
 
 
-class FooterAdapter(val retry: () -> Unit) : LoadStateAdapter<FooterAdapter.ViewHolder>() {
+class FooterAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<FooterAdapter.HitLoadStateViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
-        val retryButton: Button = itemView.findViewById(R.id.retry_button)
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.footer_item, parent, false)
-        val holder = ViewHolder(view)
-        holder.retryButton.setOnClickListener {
-            retry()
+    class HitLoadStateViewHolder(
+        private val binding: ItemFooterBinding,
+        retry: () -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.itemFooterButton.setOnClickListener { retry.invoke() }
         }
-        return holder
+
+        fun bind(loadState: LoadState) {
+
+            binding.itemFooterProgressBar.isVisible = loadState is LoadState.Loading
+            if (loadState is LoadState.Error) {
+                binding.itemFooterTextView.text = loadState.error.localizedMessage
+            }
+            binding.itemFooterButton.isVisible = loadState is LoadState.Error
+            binding.itemFooterTextView.isVisible = loadState is LoadState.Error
+
+        }
+
+
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
-        holder.progressBar.isVisible = loadState is LoadState.Loading
-        holder.retryButton.isVisible = loadState is LoadState.Error
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ): HitLoadStateViewHolder {
+
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_footer, parent, false)
+
+        //绑定视图
+        val binding = ItemFooterBinding.bind(view)
+
+        return HitLoadStateViewHolder(binding, retry)
     }
 
+    override fun onBindViewHolder(holder: HitLoadStateViewHolder, loadState: LoadState) {
+        holder.bind(loadState)
+    }
 }

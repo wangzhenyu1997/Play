@@ -28,10 +28,12 @@
 
     <!--fragment_first-->
     <!--fragment_second-->
-    <string name="fragment_second_news">News</string>
+    <string name="fragment_second_search">What do you want?</string>
     <!--fragment_third-->
     <!--fragment_fourth-->
 
+    <!--item_footer-->
+    <string name="item_footer_button">Retry</string>
 
     <!--footer_item-->
     <string name="footer_item_button">Retry</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_fourth"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,58 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_fourth_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_weight="2">-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/button"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="insertUser" />-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/button2"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="updateUser" />-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/button3"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="deleteUser" />-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/button4"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="deleteAllUser" />-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/button5"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="getAllUsers" />-->
-
-    <!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
