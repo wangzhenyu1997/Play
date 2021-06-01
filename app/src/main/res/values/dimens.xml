@@ -13,4 +13,9 @@
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="zuixiaohaoziti">10sp</dimen>
+    <dimen name="xiaohaoziti">20sp</dimen>
+    <dimen name="dahaoziti">30sp</dimen>
+    <dimen name="chaodahaoziti">40sp</dimen>
+
 </resources>

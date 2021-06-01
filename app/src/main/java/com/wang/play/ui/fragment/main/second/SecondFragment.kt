@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tencent.mmkv.MMKV
 import com.wang.play.MyApplication
@@ -17,7 +18,6 @@ import com.wang.play.adapter.FooterAdapter
 import com.wang.play.adapter.test.TestAdapter
 import com.wang.play.databinding.FragmentSecondBinding
 import com.wang.play.datasource.service.test.CreateTestService
-import com.wang.play.datasource.service.test.TestService
 import com.wang.play.repository.test.TestRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -28,7 +28,7 @@ class SecondFragment : Fragment() {
 
     private val secondViewModel: SecondViewModel by viewModels {
         SecondViewModel
-            .SecondViewModelFactory(TestRepository(CreateTestService.testCreate<TestService>()))
+            .SecondViewModelFactory(TestRepository(CreateTestService.testCreate()))
     }
 
     private var _binding: FragmentSecondBinding? = null
@@ -38,7 +38,6 @@ class SecondFragment : Fragment() {
     //初始化所需fragmentSecondRecyclerView的Adapter
     private val testAdapter = TestAdapter()
 
-    //MMKV
     private val kv = MMKV.defaultMMKV()
 
     //这是一个用来发送网络请求的launch协程
@@ -87,6 +86,32 @@ class SecondFragment : Fragment() {
             header = FooterAdapter { testAdapter.retry() },
             footer = FooterAdapter { testAdapter.retry() }
         )
+
+        testAdapter.addLoadStateListener {
+
+            when (it.refresh) {
+                is LoadState.NotLoading -> {
+                    binding.fragmentSecondRecyclerView.visibility = View.VISIBLE
+                    binding.fragmentSecondError.visibility = View.INVISIBLE
+                    binding.fragmentSecondLoading.visibility = View.INVISIBLE
+                }
+                is LoadState.Loading -> {
+                    binding.fragmentSecondRecyclerView.visibility = View.INVISIBLE
+                    binding.fragmentSecondError.visibility = View.INVISIBLE
+                    binding.fragmentSecondLoading.visibility = View.VISIBLE
+                    binding.fragmentSecondLoading.playAnimation()
+                }
+                is LoadState.Error -> {
+                    binding.fragmentSecondRecyclerView.visibility = View.INVISIBLE
+                    binding.fragmentSecondError.visibility = View.VISIBLE
+                    binding.fragmentSecondLoading.visibility = View.INVISIBLE
+                    binding.fragmentSecondError.playAnimation()
+                }
+
+
+            }
+        }
+
 
         val temp: String = kv?.decodeString(UtilString.SecondFragmentSearch, "cat") ?: "cat"
         binding.fragmentSecondEditText.setText(temp)
@@ -148,16 +173,6 @@ class SecondFragment : Fragment() {
     }
 
 }
-
-//    private fun showEmptyList(show: Boolean) {
-//        if (show) {
-//            binding.fragmentSecondError.visibility = View.VISIBLE
-//            binding.fragmentSecondRecyclerView.visibility = View.GONE
-//        } else {
-//            binding.fragmentSecondError.visibility = View.GONE
-//            binding.fragmentSecondRecyclerView.visibility = View.VISIBLE
-//        }
-//    }
 
 
 // findNavController().popBackStack()

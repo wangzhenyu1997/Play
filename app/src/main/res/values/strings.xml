@@ -35,13 +35,10 @@
     <!--item_footer-->
     <string name="item_footer_button">Retry</string>
 
-    <!--footer_item-->
-    <string name="footer_item_button">Retry</string>
+    <!--item_fragment_second_separator-->
+    <string name="item_fragment_second_separator_button">Download</string>
 
     <!--    这是测试字符串-->
-    <string name="welcome" translatable="false">"Welcome !"</string>
-    <string name="login_failed" translatable="false">"Login failed"</string>
-    <string name="hello_world" translatable="false">Hello Square World!</string>
     <string name="test">TEST</string>
 
 

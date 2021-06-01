@@ -3,7 +3,6 @@ package com.wang.play.repository.test
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wang.play.MyApplication
-import com.wang.play.data.main.Beautiful
 import com.wang.play.data.test.Hit
 import com.wang.play.datasource.service.test.TestService
 
@@ -13,7 +12,8 @@ import com.wang.play.datasource.service.test.TestService
 class TestPagingSource(
     private val service: TestService,
     private val query: String,
-    private val image_type: String = "all"
+    private val image_type: String = "all",
+    private val order: String = "popular"
 ) : PagingSource<Int, Hit>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Hit> {
@@ -24,11 +24,17 @@ class TestPagingSource(
         return try {
             //获取当前页的数据
             val response =
-                service.searchImages(MyApplication.Pixabay_Key, query, image_type, position, params.loadSize)
+                service.searchImages(
+                    MyApplication.Pixabay_Key,
+                    query,
+                    image_type,
+                    order,
+                    position,
+                    params.loadSize
+                )
             val repos = response.hits
 
-
-            //最后一页数据是空的
+            //最后一页数据是空的,所以处理item时需考虑item为空的情况
             LoadResult.Page(
                 data = repos,
                 prevKey = if (position > 1) position - 1 else null,
