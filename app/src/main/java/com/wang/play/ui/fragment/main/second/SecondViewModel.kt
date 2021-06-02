@@ -24,25 +24,11 @@ class SecondViewModel(private val repository: TestRepository) : ViewModel() {
         }
     }
 
-    //当前所查询的目标
-    private var currentQueryValue: String? = null
-
-    //查询目标返回的数据
-    private var currentSearchResult: Flow<PagingData<UiModel>>? = null
-
 
     fun searchHit(query: String): Flow<PagingData<UiModel>> {
 
-        val lastResult = currentSearchResult
-        if (query == currentQueryValue && lastResult != null) {
-            //避免重复查询
-            return lastResult
-        }
-        currentQueryValue = query
-
-
         //getTestResultStream返回值为 Flow<PagingData<Hit>>
-        val newResult: Flow<PagingData<UiModel>> = repository.getTestResultStream(query)
+        return repository.getTestResultStream(query)
             //返回Flow<PagingData<UiModel.HitItem>>
             .map { value: PagingData<Hit> -> value.map { UiModel.HitItem(it) } }
             //插入separator
@@ -64,8 +50,8 @@ class SecondViewModel(private val repository: TestRepository) : ViewModel() {
                 }
             }
             .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
+
+
     }
 
 }

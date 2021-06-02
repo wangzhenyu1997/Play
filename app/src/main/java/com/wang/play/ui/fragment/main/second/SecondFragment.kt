@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tencent.mmkv.MMKV
+import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.UtilString
 import com.wang.play.adapter.FooterAdapter
@@ -53,7 +54,11 @@ class SecondFragment : Fragment() {
 
         _binding =
             FragmentSecondBinding.inflate(inflater, container, false)
+
         initView()
+
+
+
         return binding.root
     }
 
@@ -118,9 +123,9 @@ class SecondFragment : Fragment() {
 
         search(temp)
         initSearch()
+        initRefresh()
 
     }
-
 
     //请求数据并加载到adapter上
     private fun search(query: String) {
@@ -128,6 +133,11 @@ class SecondFragment : Fragment() {
         //避免重复请求
         searchJob?.cancel()
         searchJob = scope.launch(Dispatchers.IO) {
+            launch(Dispatchers.Main)
+            {
+                delay(1000)
+                binding.fragmentSecondSwipeRefreshLayout.isRefreshing = false
+            }
             secondViewModel.searchHit(query).collect {
                 testAdapter.submitData(it)
             }
@@ -169,6 +179,12 @@ class SecondFragment : Fragment() {
             if (it.isNotEmpty()) {
                 search(it.toString())
             }
+        }
+    }
+
+    private fun initRefresh() {
+        binding.fragmentSecondSwipeRefreshLayout.setOnRefreshListener {
+            search(binding.fragmentSecondEditText.text.trim().toString())
         }
     }
 
