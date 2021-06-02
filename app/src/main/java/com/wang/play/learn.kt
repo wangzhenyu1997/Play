@@ -3,15 +3,16 @@ package com.wang.play
 
 fun main() {
 
+    val temp = { a: String, b: Int ->
+        "$a  ${b.toString()}"
+    }
 
-    apple()
 
-
+    show("aa", temp)
 }
 
 
-fun apple() {
-    println("AAAAAAAAAAAA")
+private fun show(a: String, b: (String, Int) -> String) {
+    println(b(a, 2))
 }
-
 

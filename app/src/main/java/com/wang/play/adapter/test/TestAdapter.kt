@@ -12,12 +12,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
 import com.wang.play.R
 import com.wang.play.data.test.UiModel
 
 class TestAdapter : PagingDataAdapter<UiModel, RecyclerView.ViewHolder>(DIFF) {
-
 
     object DIFF : DiffUtil.ItemCallback<UiModel>() {
         override fun areItemsTheSame(oldItem: UiModel, newItem: UiModel) =
@@ -26,58 +26,108 @@ class TestAdapter : PagingDataAdapter<UiModel, RecyclerView.ViewHolder>(DIFF) {
 
         override fun areContentsTheSame(oldItem: UiModel, newItem: UiModel) =
             oldItem == newItem
+    }
+
+    companion object {
+
+        val hitItemOnClick: (UiModel.HitItem) -> Unit = {
+            Toast.makeText(MyApplication.context, it.hit.largeImageURL, Toast.LENGTH_SHORT).show()
+            MyApplicationLogUtil.d("TodayTest", it.hit.largeImageURL)
+        }
+
+        val separatorItemOnClick: (
+            UiModel.HitItem?,
+            UiModel.SeparatorItem
+        ) -> Unit = { beforeItem, item ->
+            Toast.makeText(
+                MyApplication.context,
+                "${beforeItem?.hit?.largeImageURL}    ${item.description}",
+                Toast.LENGTH_SHORT
+            ).show()
+            MyApplicationLogUtil.d(
+                "TodayTest",
+                "${beforeItem?.hit?.largeImageURL}    ${item.description}"
+            )
+        }
 
     }
 
-    class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TestViewHolder(itemView: View, private val onClick: (UiModel.HitItem) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
+
         private val imageView: ImageView =
             itemView.findViewById(R.id.item_fragment_second_imageView)
         private val textView: TextView =
             itemView.findViewById(R.id.item_fragment_second_textView)
 
+        private var itemInViewHolder: UiModel.HitItem? = null
+
         init {
             imageView.setOnClickListener {
-                Toast.makeText(MyApplication.context, "查看大图", Toast.LENGTH_SHORT).show()
+                itemInViewHolder?.let {
+                    onClick(it)
+                }
             }
         }
 
-        fun bind(url: String, like: String) {
-            imageView.load(url) {
+        fun bind(item: UiModel.HitItem) {
+
+            itemInViewHolder = item
+
+            imageView.load(item.hit.webformatURL) {
                 crossfade(1000)
                 placeholder(R.drawable.loading)
                 error(R.drawable.error)
             }
-            textView.text = like
+            textView.text = item.hit.likes.toString()
         }
 
         companion object {
-            fun create(parent: ViewGroup): TestViewHolder {
+            inline fun create(parent: ViewGroup): TestViewHolder {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_fragment_second, parent, false)
-                return TestViewHolder(view)
+                return TestViewHolder(view, hitItemOnClick)
             }
         }
     }
 
-    class SeparatorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SeparatorViewHolder(
+        itemView: View,
+        private val onclick: (UiModel.HitItem, UiModel.SeparatorItem) -> Unit
+    ) :
+        RecyclerView.ViewHolder(itemView) {
+
         private val description: TextView =
             itemView.findViewById(R.id.item_fragment_second_separator_textView)
         private val button: ImageButton =
             itemView.findViewById(R.id.item_fragment_second_separator_button)
 
+        private var beforeItemInViewHolder: UiModel.HitItem? = null
+        private var itemInViewHolder: UiModel.SeparatorItem? = null
+
+
         //给Button绑定方法
         init {
             button.setOnClickListener {
-                Toast.makeText(MyApplication.context, "AAA", Toast.LENGTH_SHORT).show()
+                if (beforeItemInViewHolder != null && itemInViewHolder != null) {
+                    onclick(beforeItemInViewHolder!!, itemInViewHolder!!)
+                }
             }
         }
 
-        fun bind(descriptionText: String, isTitle: Boolean) {
-            if (isTitle) {
+        fun bind(
+            beforeItem: UiModel.HitItem?,
+            item: UiModel.SeparatorItem,
+        ) {
+
+            beforeItemInViewHolder = beforeItem
+            itemInViewHolder = item
+
+            if (item.isTitle) {
                 button.visibility = View.GONE
-                description.text = descriptionText
+                description.text = item.description
             } else {
-                description.text = "$descriptionText ❤"
+                description.text = "${item.description} ❤"
                 description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
             }
         }
@@ -86,7 +136,7 @@ class TestAdapter : PagingDataAdapter<UiModel, RecyclerView.ViewHolder>(DIFF) {
             fun create(parent: ViewGroup): SeparatorViewHolder {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_fragment_second_separator, parent, false)
-                return SeparatorViewHolder(view)
+                return SeparatorViewHolder(view, separatorItemOnClick)
             }
         }
 
@@ -103,7 +153,6 @@ class TestAdapter : PagingDataAdapter<UiModel, RecyclerView.ViewHolder>(DIFF) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         return if (viewType == R.layout.item_fragment_second) {
             TestViewHolder.create(parent)
         } else {
@@ -119,19 +168,15 @@ class TestAdapter : PagingDataAdapter<UiModel, RecyclerView.ViewHolder>(DIFF) {
         temp?.let {
             when (it) {
                 is UiModel.HitItem -> (holder as TestViewHolder).bind(
-                    it.hit.webformatURL,
-                    it.hit.likes.toString()
+                    it
                 )
                 is UiModel.SeparatorItem -> (holder as SeparatorViewHolder).bind(
-                    it.description,
-                    it.isTitle
+                    if ((position - 1) < 0) null else getItem(position - 1) as UiModel.HitItem,
+                    it
                 )
 
             }
         }
 
-
     }
-
-
 }
