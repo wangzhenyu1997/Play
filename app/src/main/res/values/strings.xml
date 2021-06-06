@@ -38,6 +38,9 @@
     <!--item_fragment_second_separator-->
     <string name="item_fragment_second_separator_button">Download</string>
 
+    <!--menu_second_fragment-->
+    <string name="menu_fragment_second_refresh">Refresh</string>
+
     <!--    这是测试字符串-->
     <string name="test">TEST</string>
 

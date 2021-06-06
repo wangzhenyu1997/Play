@@ -9,12 +9,13 @@ import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.wang.play.data.test.Hit
 import com.wang.play.data.test.UiModel
-import com.wang.play.repository.test.TestRepository
+import com.wang.play.repository.main.second.TestRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class SecondViewModel(private val repository: TestRepository) : ViewModel() {
 
+    //创建带参数的ViewModel
     class SecondViewModelFactory(private val repository: TestRepository) :
         ViewModelProvider.Factory {
 
@@ -28,7 +29,7 @@ class SecondViewModel(private val repository: TestRepository) : ViewModel() {
     fun searchHit(query: String): Flow<PagingData<UiModel>> {
 
         //getTestResultStream返回值为 Flow<PagingData<Hit>>
-        return repository.getTestResultStream(query)
+        return repository.getSecondResultStream(query)
             //返回Flow<PagingData<UiModel.HitItem>>
             .map { value: PagingData<Hit> -> value.map { UiModel.HitItem(it) } }
             //插入separator

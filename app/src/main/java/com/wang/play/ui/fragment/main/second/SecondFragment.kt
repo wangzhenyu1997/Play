@@ -2,9 +2,7 @@ package com.wang.play.ui.fragment.main.second
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -12,14 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tencent.mmkv.MMKV
-import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.MyApplication
+import com.wang.play.R
 import com.wang.play.UtilString
 import com.wang.play.adapter.FooterAdapter
 import com.wang.play.adapter.test.TestAdapter
 import com.wang.play.databinding.FragmentSecondBinding
 import com.wang.play.datasource.service.test.CreateTestService
-import com.wang.play.repository.test.TestRepository
+import com.wang.play.repository.main.second.TestRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
@@ -36,6 +34,14 @@ class SecondFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+
+
+
+
+
+
+
+
     //初始化所需fragmentSecondRecyclerView的Adapter
     private val testAdapter = TestAdapter()
 
@@ -46,6 +52,11 @@ class SecondFragment : Fragment() {
     private val scope = MainScope()
 
 
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,12 +64,12 @@ class SecondFragment : Fragment() {
     ): View {
 
         _binding =
+
             FragmentSecondBinding.inflate(inflater, container, false)
+        //设置当前fragment显示菜单
+        setHasOptionsMenu(true)
 
         initView()
-
-
-
         return binding.root
     }
 
@@ -73,6 +84,23 @@ class SecondFragment : Fragment() {
         _binding = null
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_second_fragment, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+
+            R.id.menu_second_fragment_refresh -> {
+                search(binding.fragmentSecondEditText.text.toString())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     //初始化界面
@@ -93,12 +121,16 @@ class SecondFragment : Fragment() {
         )
 
         testAdapter.addLoadStateListener {
-
             when (it.refresh) {
                 is LoadState.NotLoading -> {
-                    binding.fragmentSecondRecyclerView.visibility = View.VISIBLE
                     binding.fragmentSecondError.visibility = View.INVISIBLE
                     binding.fragmentSecondLoading.visibility = View.INVISIBLE
+                    //数据bind到RecyclerView上需要时间。等待，避免闪烁
+                    scope.launch(Dispatchers.Main)
+                    {
+                        delay(400)
+                        binding.fragmentSecondRecyclerView.visibility = View.VISIBLE
+                    }
                 }
                 is LoadState.Loading -> {
                     binding.fragmentSecondRecyclerView.visibility = View.INVISIBLE
@@ -112,10 +144,10 @@ class SecondFragment : Fragment() {
                     binding.fragmentSecondLoading.visibility = View.INVISIBLE
                     binding.fragmentSecondError.playAnimation()
                 }
-
-
             }
         }
+
+
 
 
         val temp: String = kv?.decodeString(UtilString.SecondFragmentSearch, "cat") ?: "cat"
@@ -154,6 +186,7 @@ class SecondFragment : Fragment() {
         //imeOptions=”actionSend” –> EditorInfo.IME_ACTION_SEND
         //imeOptions=”actionNext” –> EditorInfo.IME_ACTION_NEXT
         //imeOptions=”actionDone” –> EditorInfo.IME_ACTION_DONE
+        //点击搜索后收起软键盘
         binding.fragmentSecondEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //收起软键盘

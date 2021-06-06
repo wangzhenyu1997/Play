@@ -18,4 +18,5 @@
     <string name="fragment_second_search">你想要什么 ?</string>
     <string name="item_footer_button">重试</string>
     <string name="item_fragment_second_separator_button">下载</string>
+    <string name="menu_fragment_second_refresh">刷新</string>
 </resources>
