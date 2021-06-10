@@ -13,48 +13,34 @@ import com.tencent.mmkv.MMKV
 import com.wang.play.MyApplication
 import com.wang.play.R
 import com.wang.play.UtilString
-import com.wang.play.adapter.FooterAdapter
-import com.wang.play.adapter.test.TestAdapter
+import com.wang.play.adapter.main.second.FooterAdapter
+import com.wang.play.adapter.main.second.SecondAdapter
 import com.wang.play.databinding.FragmentSecondBinding
-import com.wang.play.datasource.service.test.CreateTestService
-import com.wang.play.repository.main.second.TestRepository
+import com.wang.play.datasource.service.main.second.CreateSecondService
+import com.wang.play.repository.main.second.SecondRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
 
 class SecondFragment : Fragment() {
 
-
     private val secondViewModel: SecondViewModel by viewModels {
         SecondViewModel
-            .SecondViewModelFactory(TestRepository(CreateTestService.testCreate()))
+            .SecondViewModelFactory(SecondRepository(CreateSecondService.testCreate()))
     }
 
     private var _binding: FragmentSecondBinding? = null
     private val binding
         get() = _binding!!
 
-
-
-
-
-
-
-
-
     //初始化所需fragmentSecondRecyclerView的Adapter
-    private val testAdapter = TestAdapter()
+    private val secondAdapter: SecondAdapter = SecondAdapter()
 
     private val kv = MMKV.defaultMMKV()
 
     //这是一个用来发送网络请求的launch协程
     private var searchJob: Job? = null
     private val scope = MainScope()
-
-
-
-
-
 
 
     override fun onCreateView(
@@ -64,8 +50,8 @@ class SecondFragment : Fragment() {
     ): View {
 
         _binding =
-
             FragmentSecondBinding.inflate(inflater, container, false)
+
         //设置当前fragment显示菜单
         setHasOptionsMenu(true)
 
@@ -115,12 +101,12 @@ class SecondFragment : Fragment() {
         //也就是说如果我们添加了一个页头，那么只有在PagingSource中返回LoadResult.Page的时候prevKey不为null才会显示出来，
         //所以如果我们从第一页开始加载是看不到这个Header的，如果我们一开始加载的页数是第5页，那么我们在往上滑动的时候，才能看到我们的Header
 
-        binding.fragmentSecondRecyclerView.adapter = testAdapter.withLoadStateHeaderAndFooter(
-            header = FooterAdapter { testAdapter.retry() },
-            footer = FooterAdapter { testAdapter.retry() }
+        binding.fragmentSecondRecyclerView.adapter = secondAdapter.withLoadStateHeaderAndFooter(
+            header = FooterAdapter { secondAdapter.retry() },
+            footer = FooterAdapter { secondAdapter.retry() }
         )
 
-        testAdapter.addLoadStateListener {
+        secondAdapter.addLoadStateListener {
             when (it.refresh) {
                 is LoadState.NotLoading -> {
                     binding.fragmentSecondError.visibility = View.INVISIBLE
@@ -148,8 +134,6 @@ class SecondFragment : Fragment() {
         }
 
 
-
-
         val temp: String = kv?.decodeString(UtilString.SecondFragmentSearch, "cat") ?: "cat"
         binding.fragmentSecondEditText.setText(temp)
 
@@ -171,7 +155,7 @@ class SecondFragment : Fragment() {
                 binding.fragmentSecondSwipeRefreshLayout.isRefreshing = false
             }
             secondViewModel.searchHit(query).collect {
-                testAdapter.submitData(it)
+                secondAdapter.submitData(it)
             }
         }
     }
@@ -223,8 +207,4 @@ class SecondFragment : Fragment() {
 
 }
 
-
-// findNavController().popBackStack()
-//sharedElementEnterTransition = TransitionInflater.from(requireContext())
-//            .inflateTransition(R.transition.shared_image)
 

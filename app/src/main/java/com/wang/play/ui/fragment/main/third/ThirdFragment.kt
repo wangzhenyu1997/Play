@@ -7,14 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wang.mylibrary.util.MyApplicationLogUtil
-import com.wang.play.adapter.test.TestAdapter
 import com.wang.play.databinding.FragmentThirdBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
-
-
 
 
 class ThirdFragment : Fragment() {

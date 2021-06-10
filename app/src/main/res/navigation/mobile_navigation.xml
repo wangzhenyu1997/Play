@@ -6,24 +6,23 @@
     app:startDestination="@+id/navigation_first">
 
     <fragment
-        android:id="@+id/testFragment2"
-        android:name="com.wang.play.TestFragment"
-        android:label="TestFragment" />
-    <fragment
         android:id="@+id/navigation_first"
         android:name="com.wang.play.ui.fragment.main.first.FirstFragment"
         android:label="@string/title_first"
-        tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_navigation_first_to_testFragment"
-            app:destination="@id/testFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_first" />
 
     <fragment
         android:id="@+id/navigation_second"
         android:name="com.wang.play.ui.fragment.main.second.SecondFragment"
         android:label="@string/title_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_navigation_second_to_imageDetailActivity"
+            app:enterAnim="@anim/slide_from_bottom_to_top_in"
+            app:exitAnim="@anim/to_transparent"
+            app:destination="@id/imageDetailActivity" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_third"
@@ -36,14 +35,12 @@
         android:name="com.wang.play.ui.fragment.main.fourth.FourthFragment"
         android:label="@string/title_fourth"
         tools:layout="@layout/fragment_fourth" />
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="com.wang.play.TestFragment"
-        android:label="TestFragment" >
-        <action
-            android:id="@+id/action_testFragment_to_testFragment2"
-            app:destination="@id/testFragment2" />
-    </fragment>
+
+    <activity
+        android:id="@+id/imageDetailActivity"
+        android:name="com.wang.play.ui.activity.image.ImageDetailActivity"
+        android:label="activity_image_detail"
+        tools:layout="@layout/activity_image_detail" />
 
 
 </navigation>

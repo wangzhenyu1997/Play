@@ -15,7 +15,6 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,39 +27,5 @@ class FirstFragment : Fragment() {
 
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-
-    }
-
-
-    // binding.button.setOnClickListener {
-    //
-    //            val bundle = Bundle()
-    //            bundle.putString("testData", "923340")
-    //            findNavController().navigate(
-    //                R.id.action_navigation_first_to_navigation_activity_loginActivity,
-    //                bundle,
-    //                null,
-    //                null
-    //            )
-    //        }
-    //
-    //        binding.button2.setOnClickListener {
-    //
-    //
-    //            val extras: FragmentNavigator.Extras =
-    //                FragmentNavigatorExtras(binding.imageView to "testTransition")
-    //
-    //            findNavController().navigate(
-    //                R.id.action_navigation_first_to_navigation_second,
-    //                null,
-    //                null,
-    //                extras
-    //            )
-    //        }
 
 }

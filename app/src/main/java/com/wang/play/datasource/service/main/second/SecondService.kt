@@ -1,10 +1,10 @@
-package com.wang.play.datasource.service.test
+package com.wang.play.datasource.service.main.second
 
-import com.wang.play.data.test.Pixabay
+import com.wang.play.data.main.second.Pixabay
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface TestService {
+interface SecondService {
 
 
     //key为我的KEY

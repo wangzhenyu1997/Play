@@ -1,4 +1,4 @@
-package com.wang.play.data.test
+package com.wang.play.data.main.second
 
 sealed class UiModel {
     data class HitItem(val hit: Hit) : UiModel()

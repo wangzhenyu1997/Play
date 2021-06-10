@@ -3,14 +3,14 @@ package com.wang.play.repository.main.second
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wang.play.MyApplication
-import com.wang.play.data.test.Hit
-import com.wang.play.datasource.service.test.TestService
+import com.wang.play.data.main.second.Hit
+import com.wang.play.datasource.service.main.second.SecondService
 
 //Int为页码的数据类型
 //Hit为每一页每一项的数据类型
 //service为获取数据的Service,
-class TestPagingSource(
-    private val service: TestService,
+class SecondPagingSource(
+    private val service: SecondService,
     private val query: String,
     private val image_type: String = "all",
     private val order: String = "popular"

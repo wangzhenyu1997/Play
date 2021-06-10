@@ -1,4 +1,4 @@
-package com.wang.play.adapter
+package com.wang.play.adapter.main.second
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

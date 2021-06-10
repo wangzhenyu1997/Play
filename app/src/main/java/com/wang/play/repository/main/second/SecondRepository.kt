@@ -3,12 +3,11 @@ package com.wang.play.repository.main.second
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.wang.play.data.test.Hit
-import com.wang.play.datasource.service.test.TestService
-import com.wang.play.repository.main.second.TestPagingSource
+import com.wang.play.data.main.second.Hit
+import com.wang.play.datasource.service.main.second.SecondService
 import kotlinx.coroutines.flow.Flow
 
-class TestRepository(private val service: TestService) {
+class SecondRepository(private val service: SecondService) {
 
     fun getSecondResultStream(query: String): Flow<PagingData<Hit>> {
         return Pager(
@@ -17,7 +16,7 @@ class TestRepository(private val service: TestService) {
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                TestPagingSource(
+                SecondPagingSource(
                     service,
                     query
                 )

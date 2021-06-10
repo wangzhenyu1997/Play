@@ -1,4 +1,4 @@
-package com.wang.play.data.test
+package com.wang.play.data.main.second
 
 data class Pixabay(
     val hits: List<Hit>,
