@@ -1,25 +1,21 @@
 package com.wang.play
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
+fun main() {
+    var a: Apple? = Apple()//强引用
 
-fun main() = runBlocking {
-    launch {
-        delay(1000)
-        println("AAAA")
-    }
+    println(a)
 
-    runBlocking {
-       launch {
-           delay(2000)
-           println("BBBB")
-       }
-       delay(500)
-       println("CCCCC")
-   }
+    a = null
 
+    println(a)
 
-}
+    System.gc()
+
+    Thread.sleep(1000)
+    println()
+    println()
+    println("______________")
+    println("______________")
+    println("______________")
+} 
