@@ -3,20 +3,20 @@ package com.wang.play.ui.activity.main
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.wang.play.BaseActivity
 import com.wang.play.R
 import com.wang.play.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     //绑定视图
     private val binding: ActivityMainBinding by lazy {
@@ -27,10 +27,8 @@ class MainActivity : BaseActivity() {
     private var isExit: Boolean = false
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
 
         //初始化Navigation
@@ -66,7 +64,6 @@ class MainActivity : BaseActivity() {
 
         return super.onKeyDown(keyCode, event)
     }
-
 
 
     //初始化导航

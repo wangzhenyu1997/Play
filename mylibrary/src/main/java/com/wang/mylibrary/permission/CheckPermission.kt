@@ -6,6 +6,15 @@ object CheckPermission {
 
     private const val TAG = "InvisibleFragment"
 
+    //FragmentManager类负责对应用的Fragment执行一些操作,如添加，移除或者替换它们，以及将他们添加到返回堆栈
+
+    //访问FragmentManager
+    //在Activity中，每个FragmentActivity及其子类（如AppCompatActivity）都可以通过 getSupportFragmentManager()
+    //方法访问FragmentManager。
+    //在Fragment中访问
+    //Fragment也能够托管一个或多个子Fragment。在Fragment内,可以通过getChildFragmentManager()
+    //获取对管理Fragment子级的FragmentManager的引用。如果您需要访问其宿主FragmentManager，可以使用getParentFragmentManager()。
+
     fun request(
         activity: FragmentActivity,
         vararg permissions: String,
@@ -19,6 +28,9 @@ object CheckPermission {
             exitedFragment as InvisibleFragment
         } else {
             val invisibleFragment = InvisibleFragment()
+
+
+
             fragmentManager.beginTransaction().add(invisibleFragment, TAG).commitNow()
             invisibleFragment
         }

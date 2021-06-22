@@ -6,65 +6,40 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.wang.mylibrary.util.MyApplicationLogUtil
 import com.wang.play.BaseActivity
 import com.wang.play.R
 import com.wang.play.databinding.ActivityLoginBinding
 import com.wang.play.ui.fragment.login.login.LoginFragment
 import com.wang.play.ui.fragment.login.register.RegisterFragment
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     companion object {
         private const val MIN_SCALE = 0.85f
         private const val MIN_ALPHA = 0.5f
     }
 
-    private lateinit var loginBinding: ActivityLoginBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MyApplicationLogUtil.d("LoginActivityLog", "onCreate")
-
-        loginBinding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(loginBinding.root)
 
         viewPager2Init()
-
         viewListener()
     }
 
-    override fun onStart() {
-        super.onStart()
-        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onPause")
-    }
 
     override fun onStop() {
         super.onStop()
-        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onStop")
         finish()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        MyApplicationLogUtil.d("TestFragmentLoginActivityLog", "onDestroy")
-    }
+    override fun getViewBinding() =
+        ActivityLoginBinding.inflate(layoutInflater)
 
     //配置ViewPager2
     private fun viewPager2Init() {
         //设置各个Fragment()
-        loginBinding.activityLoginViewPager2.adapter = object : FragmentStateAdapter(this) {
+        binding.activityLoginViewPager2.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = 2
             override fun createFragment(position: Int) = when (position) {
                 0 -> LoginFragment()
@@ -74,7 +49,7 @@ class LoginActivity : BaseActivity() {
         //设置转换动画,来自Android文档：https://developer.android.google.cn/training/animation/screen-slide-2
         //object : ViewPager2.PageTransformer
         //override fun transformPage(page: View, position: Float)
-        loginBinding.activityLoginViewPager2.setPageTransformer { page, position ->
+        binding.activityLoginViewPager2.setPageTransformer { page, position ->
             page.apply {
                 val pageWidth = width
                 val pageHeight = height
@@ -107,8 +82,8 @@ class LoginActivity : BaseActivity() {
         }
 
         TabLayoutMediator(
-            loginBinding.activityLoginTabLayout,
-            loginBinding.activityLoginViewPager2
+            binding.activityLoginTabLayout,
+            binding.activityLoginViewPager2
         ) { tab, position ->
             when (position) {
                 0 -> tab.text = resources.getString(R.string.activity_login_login)
@@ -117,19 +92,19 @@ class LoginActivity : BaseActivity() {
         }.attach()
     }
 
-
     //监听键盘的弹出与收回
     private fun viewListener() {
 
-        loginBinding.activityLogin.viewTreeObserver.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener { //获取当前可见显示框的rectangle
+        binding.activityLogin.viewTreeObserver.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener { //获取当前可见显示框的rectangle
             val rect = Rect()
-            loginBinding.activityLogin.getWindowVisibleDisplayFrame(rect)
-            if (loginBinding.activityLogin.rootView.height - rect.bottom > 250) {
-                loginBinding.activityLoginLottie.visibility = View.INVISIBLE
+            binding.activityLogin.getWindowVisibleDisplayFrame(rect)
+            if (binding.activityLogin.rootView.height - rect.bottom > 250) {
+                binding.activityLoginLottie.visibility = View.INVISIBLE
             } else {
-                loginBinding.activityLoginLottie.visibility = View.VISIBLE
+                binding.activityLoginLottie.visibility = View.VISIBLE
             }
         })
     }
+
 
 }

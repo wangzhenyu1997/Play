@@ -14,6 +14,9 @@ class InvisibleFragment : Fragment() {
         requestPermissions(permissions, 1)
     }
 
+
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

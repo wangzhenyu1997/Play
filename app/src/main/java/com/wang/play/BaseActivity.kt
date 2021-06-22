@@ -1,18 +1,18 @@
 package com.wang.play
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import java.lang.ref.WeakReference
 
-@SuppressLint("Registered")
-open class BaseActivity : AppCompatActivity() {
+
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+
+
+    private lateinit var _binding: VB
+    protected val binding
+        get() = _binding
 
     //判断当前Activity是否在前台。
     protected var isActive: Boolean = false
@@ -25,8 +25,17 @@ open class BaseActivity : AppCompatActivity() {
 
     //日志输出标志
     protected val TAG: String = this.javaClass.simpleName
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _binding = getViewBinding()
+        setContentView(binding.root)
+    }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
+    protected abstract fun getViewBinding(): VB
+    //https://blog.csdn.net/jingzz1/article/details/105909040/
+
+
+    //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        logD(TAG, "BaseActivity-->onCreate()")
 //

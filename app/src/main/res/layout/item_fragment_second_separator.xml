@@ -26,5 +26,6 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="center"
-        android:src="@drawable/ic_download" />
+        android:src="@drawable/ic_download"
+        tools:ignore="ContentDescription" />
 </LinearLayout>
